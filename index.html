@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Valyuta Konvertoru</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    .converter {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="converter">
+    <h2>💰 Valyuta Konvertoru</h2>
+    <input type="number" id="amount" placeholder="Məbləği daxil edin">
+    
+    <select id="currency">
+      <option value="azn">AZN-USD </option>
+      <option value="usd-azn">USD-AZN </option>
+      <option value="usd">USD-EUR </option>
+      <option value="tl">AZN-TL </option>
+      <option value="tl-azn">TL-AZN </option>
+      <option value="rub">AZN-RUB </option>
+      <option value="rub-azn">RUB-AZN </option>
+      
+    </select>
+    
+    <button onclick="convertMoney()">Çevirmək</button>
+    
+    <div id="result"></div>
+<h4>© İbrahimzadə</h4>
+  </div>
+
+  <script>
+    function convertMoney() {
+      const amount = parseFloat(document.getElementById('amount').value);
+      const currency = document.getElementById('currency').value;
+      let result = 0;
+      let rate = 0;
+
+      if (isNaN(amount) || amount <= 0) {
+        document.getElementById('result').innerText = "Zəhmət olmasa məbləği daxil edin!";
+        return;
+      }
+
+      // Example static rates
+      const rates = {
+        'usd': 0.92,      // USD to EUR
+        'eur': 1.09,      // EUR to USD
+        'usd-azn': 1.7,   // USD to AZN
+        'azn': 0.59 ,      // AZN to USD
+        'tl': 22.35,       // AZN to TL
+        'tl-azn': 0.045,       // TL to AZN
+        'rub': 49.72 ,      // AZN to RUB
+        'rub-azn': 0.020      // RUB to AZN
+      };
+
+      rate = rates[currency];
+      result = amount * rate;
+      document.getElementById('result').innerText = `Çevrilmiş məbləğ: ${result.toFixed(2)}`;
+    }
+  </script>
+
+</body>
+</html>
